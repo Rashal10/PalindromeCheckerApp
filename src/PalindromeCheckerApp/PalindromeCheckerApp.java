@@ -1,42 +1,39 @@
-public class UseCase12PalindromeCheckerApp {
+public class UseCase13PalindromeCheckerApp {
+
     public static void main(String[] args) {
 
         String input = "level";
 
-        // Inject strategy at runtime
-        PalindromeStrategy strategy = new StackStrategy();
+        // Start time
+        long startTime = System.nanoTime();
 
-        boolean result = strategy.check(input);
+        // Palindrome logic
+        boolean isPalindrome = checkPalindrome(input);
 
+        // End time
+        long endTime = System.nanoTime();
+
+        long executionTime = endTime - startTime;
+
+        // Output
         System.out.println("Input : " + input);
-        System.out.println("Is Palindrome? : " + result);
+        System.out.println("Is Palindrome? : " + isPalindrome);
+        System.out.println("Execution Time : " + executionTime + " ns");
     }
-}
 
-interface PalindromeStrategy {
+    private static boolean checkPalindrome(String input) {
 
-    boolean check(String input);
-}
+        int start = 0;
+        int end = input.length() - 1;
 
-class StackStrategy implements PalindromeStrategy {
+        while (start < end) {
 
-    public boolean check(String input) {
-
-        // Create stack
-        java.util.Stack<Character> stack =
-                new java.util.Stack<>();
-
-        // Push characters
-        for (char c : input.toCharArray()) {
-            stack.push(c);
-        }
-
-        // Compare with popped values
-        for (char c : input.toCharArray()) {
-
-            if (c != stack.pop()) {
+            if (input.charAt(start) != input.charAt(end)) {
                 return false;
             }
+
+            start++;
+            end--;
         }
 
         return true;
