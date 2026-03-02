@@ -1,27 +1,38 @@
-public class UseCase3PalindromeCheckerApp {
+public class UseCase4PalindromeCheckerApp {
 
+    /**
+     * Application entry point for UC4.
+     * @param args Command-line arguments
+     */
     public static void main(String[] args) {
 
-        // Hardcoded string
-        String input = "madam";
+        // Declare and initialize input string
+        String input = "radar";
 
-        // Variable to store reversed string
-        String reversed = "";
+        // Convert string into character array
+        char[] chars = input.toCharArray();
 
-        // Iterate from the last character to the first
-        for (int i = input.length() - 1; i >= 0; i--) {
-            reversed = reversed + input.charAt(i);
+        // Initialize pointers
+        int start = 0;
+        int end = chars.length - 1;
+
+        // Assume palindrome
+        boolean isPalindrome = true;
+
+        // Two-pointer comparison
+        while (start < end) {
+
+            if (chars[start] != chars[end]) {
+                isPalindrome = false;
+                break;
+            }
+
+            start++;
+            end--;
         }
 
-        // Display original and reversed strings
-        System.out.println("Original String: " + input);
-        System.out.println("Reversed String: " + reversed);
-
-        // Compare strings using equals()
-        if (input.equals(reversed)) {
-            System.out.println("Is it a Palindrome? : true");
-        } else {
-            System.out.println("Is it a Palindrome? : false");
-        }
+        // Display output
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
     }
 }
