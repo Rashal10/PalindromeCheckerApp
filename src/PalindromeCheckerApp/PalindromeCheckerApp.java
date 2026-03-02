@@ -1,30 +1,39 @@
-public class UseCase9PalindromeCheckerApp {
+public class UseCase11PalindromeCheckerApp {
     public static void main(String[] args) {
 
-        // Define input string
-        String input = "madam";
+        String input = "racecar";
 
-        // Call recursive method
-        boolean isPalindrome = check(input, 0, input.length() - 1);
+        // Create object
+        PalindromeChecker checker = new PalindromeChecker();
+
+        // Call method
+        boolean result = checker.checkPalindrome(input);
 
         // Display result
         System.out.println("Input : " + input);
-        System.out.println("Is Palindrome? : " + isPalindrome);
+        System.out.println("Is Palindrome? : " + result);
     }
+}
 
-    private static boolean check(String s, int start, int end) {
+class PalindromeChecker {
 
-        // Base condition
-        if (start >= end) {
-            return true;
+    public boolean checkPalindrome(String input) {
+
+        // Initialize pointers
+        int start = 0;
+        int end = input.length() - 1;
+
+        // Compare characters
+        while (start < end) {
+
+            if (input.charAt(start) != input.charAt(end)) {
+                return false;
+            }
+
+            start++;
+            end--;
         }
 
-        // If mismatch
-        if (s.charAt(start) != s.charAt(end)) {
-            return false;
-        }
-
-        // Recursive call
-        return check(s, start + 1, end - 1);
+        return true;
     }
 }
