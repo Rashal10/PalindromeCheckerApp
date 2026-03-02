@@ -1,27 +1,44 @@
-public class UseCase3PalindromeCheckerApp {
+import java.util.Queue;
+import java.util.LinkedList;
+import java.util.Stack;
 
+public class UseCase6PalindromeCheckerApp {
+
+    /**
+     * Application entry point for UC6.
+     * @param args Command-line arguments
+     */
     public static void main(String[] args) {
 
-        // Hardcoded string
-        String input = "madam";
+        // Define input string
+        String input = "civic";
 
-        // Variable to store reversed string
-        String reversed = "";
+        // Create Queue (FIFO)
+        Queue<Character> queue = new LinkedList<>();
 
-        // Iterate from the last character to the first
-        for (int i = input.length() - 1; i >= 0; i--) {
-            reversed = reversed + input.charAt(i);
+        // Create Stack (LIFO)
+        Stack<Character> stack = new Stack<>();
+
+        // Insert characters into queue and stack
+        for (char c : input.toCharArray()) {
+            queue.add(c);
+            stack.push(c);
         }
 
-        // Display original and reversed strings
-        System.out.println("Original String: " + input);
-        System.out.println("Reversed String: " + reversed);
+        // Assume palindrome
+        boolean isPalindrome = true;
 
-        // Compare strings using equals()
-        if (input.equals(reversed)) {
-            System.out.println("Is it a Palindrome? : true");
-        } else {
-            System.out.println("Is it a Palindrome? : false");
+        // Compare dequeue vs pop
+        while (!queue.isEmpty()) {
+
+            if (queue.remove() != stack.pop()) {
+                isPalindrome = false;
+                break;
+            }
         }
+
+        // Display result
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
     }
 }
